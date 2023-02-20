@@ -1,0 +1,36 @@
+from PIL import Image, PSDraw, ImageDraw, ImageFont
+import sys
+import pandas as pd
+
+df = pd.read_csv('Insert file directory for information to be put on badges')
+
+for index, row in df.iterrows():
+    with Image.open('Insert file directory for badge') as im:
+            draw = ImageDraw.Draw(im)
+            
+            #alter to change typeface, color of text, font
+            title_font = ImageFont.truetype('C:/Users/jerome/Desktop/POPtags/source/CenturyGothic.ttf', 40)
+            name_font = ImageFont.truetype('C:/Users/jerome/Desktop/POPtags/source/CenturyGothic.ttf', 20)
+            
+            #in this scenario I had 5 unique strings to put on each badge, all stored in a dataframe
+            name = row['First Name']
+            workshop1 = row['w1']
+            workshop2= row['w2]
+            workshop3= row['w3
+            workshop4= row['w4]
+            tour = row['tour']
+
+            #workshops
+            draw.text((460, 440), workshop1, (60, 40, 40, 100), font = title_font, anchor = 'mm')
+            draw.text((460, 494), workshop3, (60, 40, 40, 100), font = title_font, anchor = 'mm')
+            draw.text((460, 547), workshop3, (60, 40, 40, 100), font = title_font, anchor = 'mm')
+            draw.text((460, 601), workshop4, (60, 40, 40, 100), font = title_font, anchor = 'mm')
+
+            #tour guide
+            draw.text((460, 770), tour, (60, 40, 40, 100), font = title_font, anchor = 'mm')
+            
+            #name
+            draw.text((460, 1140), name, (60, 40, 40, 100), font = title_font, anchor = 'mm')
+            
+            #saving each badge as the name of its owner
+            im.save('C:/Users/jerome/Desktop/POPtags/' + name + '.png')
